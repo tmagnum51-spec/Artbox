@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 15 fév. 2026 à 22:30
+-- Généré le : lun. 16 fév. 2026 à 10:15
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -27,8 +27,9 @@ SET time_zone = "+00:00";
 -- Structure de la table `oeuvres`
 --
 
+DROP TABLE IF EXISTS `oeuvres`;
 CREATE TABLE `oeuvres` (
-  `ID_oeuvres` int(11) NOT NULL,
+  `id_oeuvre` int(11) NOT NULL,
   `titre` varchar(128) NOT NULL,
   `description` text NOT NULL,
   `artiste` varchar(256) NOT NULL,
@@ -39,7 +40,7 @@ CREATE TABLE `oeuvres` (
 -- Déchargement des données de la table `oeuvres`
 --
 
-INSERT INTO `oeuvres` (`ID_oeuvres`, `titre`, `description`, `artiste`, `image`) VALUES
+INSERT INTO `oeuvres` (`id_oeuvre`, `titre`, `description`, `artiste`, `image`) VALUES
 (1, 'Dodomu', 'Mia Tozerski est une artiste peintre ukrainienne réfugiée de la guerre. Sur cette œuvre, Dodomu (\"domicile\" en ukrainien), elle nous montre la tristesse du peuple ukrainien qu\\\'elle partage, ayant elle-même dû quitter son foyer. L\\\'œuvre évoque le drapeau liquéfié d\\\'une Ukraine en souffrance, pleurant la mort de ses compatriotes. Ce travail chargé d\\\'émotion est le symbole d\\\'un événement qui marquera l\\\'Histoire. Cette peinture à l\\\'acrylique rayonne grâce à son fond lisse et ses mélanges de couleurs éclatantes.', 'Mia Tozerski', 'img/clark-van-der-beken.png'),
 (2, 'Aashaaheen Baadal', 'Sur cette oeuvre conceptuelle à la fois organique, minérale et liquide, Anaisha Devi nous transporte dans un nuage noir envoûtant. Un sombre tableau qui, par son verni éclatant, rayonne tel un marbre poli. Une oeuvre à la cohérence transcendantale, exécutée à la perfection', 'Anaisha Devi', 'img/pawel-czerwinski-3.png'),
 (3, 'Nightlife Traffic', 'Quisque accumsan ultrices ligula vestibulum posuere. Aliquam feugiat ligula eget massa blandit condimentum. Morbi volutpat erat luctus suscipit pellentesque. Quisque cursus tempor nibh at sollicitudin. Sed blandit libero velit. Etiam tincidunt facilisis mollis. Ut mollis nunc sit amet lacinia luctus. Suspendisse volutpat enim semper arcu rutrum, et iaculis risus interdum. Duis at libero.', 'Andrew Forsythe', 'img/dan-cristian-padure.png'),
@@ -64,7 +65,7 @@ INSERT INTO `oeuvres` (`ID_oeuvres`, `titre`, `description`, `artiste`, `image`)
 -- Index pour la table `oeuvres`
 --
 ALTER TABLE `oeuvres`
-  ADD PRIMARY KEY (`ID_oeuvres`);
+  ADD PRIMARY KEY (`id_oeuvre`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -74,7 +75,7 @@ ALTER TABLE `oeuvres`
 -- AUTO_INCREMENT pour la table `oeuvres`
 --
 ALTER TABLE `oeuvres`
-  MODIFY `ID_oeuvres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_oeuvre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
