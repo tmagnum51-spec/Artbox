@@ -1,38 +1,38 @@
 <?php
     require 'header.php';
-    require 'oeuvres.php';
+    //require 'oeuvres.php';
+    require 'bdd.php'
+?>
 
-    // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
-    if(empty($_GET['id'])) {
-        header('Location: index.php');
-    }
+   <?php
+   if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header('location:index.php');
+    exit;
 
-    $oeuvre = null;
+   }
 
-    // On parcourt les oeuvres du tableau afin de rechercher celle qui a l'id précisé dans l'URL
-    foreach($oeuvres as $o) {
-        // intval permet de transformer l'id de l'URL en un nombre (exemple : "2" devient 2)
-        if($o['id'] === intval($_GET['id'])) {
-            $oeuvre = $o;
-            break; // On stoppe le foreach si on a trouvé l'oeuvre
-        }
-    }
-
-    // Si aucune oeuvre trouvé, on redirige vers la page d'accueil
-    if(is_null($oeuvre)) {
-        header('Location: index.php');
-    }
+    $id = $_GET['id'];
+    // 1. On prépare la requête
+    $sqlQuery = $mysqlClient->prepare('SELECT * FROM oeuvres where id_oeuvre = :id');
+    // 2. On l'exécute avec l'ID récupéré dans l'URL
+    $sqlQuery->execute(['id' =>$id]);
+   // 3. ON RÉCUPÈRE LE TABLEAU
+    $oeuvre = $sqlQuery->fetch();   
+    if (!$oeuvre) {
+    echo "L'oeuvre n'existe pas.";
+    exit;
+}
 ?>
 
 <article id="detail-oeuvre">
     <div id="img-oeuvre">
-        <img src="<?= $oeuvre['image'] ?>" alt="<?= $oeuvre['titre'] ?>">
+        <img src="<?= htmlspecialchars($oeuvre['image']) ?>" alt="<?= htmlspecialchars($oeuvre['titre']) ?>">
     </div>
     <div id="contenu-oeuvre">
-        <h1><?= $oeuvre['titre'] ?></h1>
-        <p class="description"><?= $oeuvre['artiste'] ?></p>
+        <h1><?= htmlspecialchars($oeuvre['titre']) ?></h1>
+        <p class="description"><?= htmlspecialchars($oeuvre['artiste']) ?></p>
         <p class="description-complete">
-             <?= $oeuvre['description'] ?>
+             <?= htmlspecialchars($oeuvre['description']) ?>
         </p>
     </div>
 </article>
